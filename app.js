@@ -61,9 +61,11 @@ function enemyCollision() {
             const enemy = allEnemies[j];
             if (
                 enemy.x < pA.x + pA.width && 
-                enemy.x + enemy.width > 
+                enemy.x + enemy.width > pA.x &&
+                enemy.y < pA.y + pA.height &&
+                enemy.y + enemy.height < pA.y
             ) {
-                
+                console.log('collision');
             }
             
         }
