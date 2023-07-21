@@ -11,6 +11,7 @@ let animate;
 const player = new Player((canvasWidth/2), (canvasHeight/2), 50, 50);
 let allEnemies = [];
 let enemyCooldown = 120;
+let playerProjectiles = player.projectiles;
 
 function animation() {
     
@@ -24,6 +25,7 @@ function animation() {
     if (player) {
         player.draw(ctx);
         player.control(canvasWidth, canvasHeight);
+        playerProjectiles = player.projectiles;
     }
 
     enemyCooldown --;
@@ -46,6 +48,26 @@ function animation() {
         const randomX = Math.random() * (canvasWidth - 50);
         let enemy = new BaseEnemy(randomX, -50 ,50, 50);
         allEnemies.push(enemy);
+    }
+}
+
+function enemyCollision() {
+    
+    let playerAssets = [player, ...playerProjectiles];
+    
+    for (let i = 0; i < playerAssets.length; i++) {
+        const pA = playerAssets[i];
+        for (let j = 0; j < allEnemies.length; j++) {
+            const enemy = allEnemies[j];
+            if (
+                enemy.x < pA.x + pA.width && 
+                enemy.x + enemy.width > 
+            ) {
+                
+            }
+            
+        }
+        
     }
 }
 
