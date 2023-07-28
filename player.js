@@ -6,6 +6,8 @@ class Player extends GameObject{
         this.controller = {};
         this.projectiles = [];
         this.cooldown = 15;
+        this.healthPoints = 3;
+        this.score = 0;
     }
 
     draw(ctx){
@@ -18,6 +20,8 @@ class Player extends GameObject{
             projectile.move();
             
         }
+
+        console.log(this.healthPoints)
     }
 
     control(canvasWidth, canvasHeight){
@@ -32,29 +36,29 @@ class Player extends GameObject{
       });
     //   console.log(this.controller);
 
-      for (const key in this.controller) {  // for in unico for che vede un oggetto come fosse un array
-            if (key.includes('Left') && this.controller[key]) {
+       
+            if (this.controller["ArrowLeft"]) {
                 this.x = this.x > 0 ? this.x - this.speed : 0;
                
             }
-            if (key.includes('Right') && this.controller[key]) {
+            if (this.controller["ArrowRight"]) {
                 this.x = (this.x + this.width) < canvasWidth ? this.x + this.speed : canvasWidth - this.width; 
                 
             }
-            if (key.includes('Up') && this.controller[key]) {
+            if (this.controller["ArrowUp"]) {
                 this.y = this.y > 0 ? this.y - this.speed : 0;
                 if (this.y <= 0) {
                     this.y = 0;
                 }
             }
-            if (key.includes('Down') && this.controller[key]) {
+            if (this.controller["ArrowDown"]) {
                 this.y = (this.y + this.height) < canvasHeight ? this.y + this.speed : canvasHeight - this.height;
                 
             }
-            if (key === ' ' && this.controller[key]) {
+            if (this.controller[" "]) {
                 this.baseAttack();
             }
-      }
+      
     }
 
     baseAttack(){
@@ -66,6 +70,13 @@ class Player extends GameObject{
         }
       
     }
+
+    death(){
+        if (this.healthPoints <= 0) {
+            
+        }
+    }
+    
 }
 
 

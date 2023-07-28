@@ -4,10 +4,13 @@ class BaseEnemy extends GameObject{
         super(x, y, width, height);
         this.speed = 3;
         this.isAlive = true;
+        this.healthPoints = 1;
+        this.score = 100;
     }
 
     draw(ctx){
         super.draw(ctx);
+        // this.death();
     }
 
     move(canvasHeight){
@@ -17,6 +20,12 @@ class BaseEnemy extends GameObject{
 
     outOfGame(canvasHeight){
         if (this.y >= canvasHeight) {
+            this.isAlive = false;
+        }
+    }
+
+    death(){
+        if (this.healthPoints <= 0) {
             this.isAlive = false;
         }
     }
