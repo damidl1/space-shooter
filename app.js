@@ -11,10 +11,12 @@ let animate;
 const player = new Player((canvasWidth/2), (canvasHeight/2), 50, 50);
 let allEnemies = [];
 let enemyCooldown = 120;
+let minibossCoolDown = 800;
 let playerProjectiles = player.projectiles;
 
 
 let state = "Play";
+let minibossProjectiles = [];
 
 
 
@@ -59,12 +61,20 @@ function animation() {
             enemyCooldown = 120;
         }
         
+        minibossSpawn();
+        minibossProjectiles = [];
+        
+        
         allEnemies = allEnemies.filter(e => e.isAlive);
     
        for (let i = 0; i < allEnemies.length; i++) {
         const enemy = allEnemies[i];
         enemy.draw(ctx);
         enemy.move(canvasHeight);
+
+        if (enemy.projectiles) {
+            minibossProjectiles.push(...enemy.projectiles);
+        }
         
       }
      } else if(state === "GameOver"){
@@ -91,9 +101,23 @@ function enemySpawn() {
     allEnemies.push(enemy);
 }
 
+
+function minibossSpawn() {
+    minibossCoolDown--;
+    if (minibossCoolDown <= 0) {
+        let xPosition = Math.random() < 0.5  ? 0 - 128 : canvasWidth;
+        let miniboss = new Miniboss(xPosition, 120, 128, 84);
+        miniboss.score = 1000;
+        miniboss.speed = xPosition < 0.5 ? 2 : -2;
+        allEnemies.push(miniboss);
+        minibossCoolDown = 1200;
+    }
+}
+
 function enemyCollision() {
     
     let playerAssets = [player, ...playerProjectiles];
+    
     
     for (let i = 0; i < playerAssets.length; i++) {
         const pA = playerAssets[i];
