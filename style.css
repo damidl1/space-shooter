@@ -3,6 +3,7 @@ html, body{
     height: 100%;
     margin: 0px;
     overflow: hidden;
+    color: white;
 }
 
 .game-over{
@@ -62,6 +63,7 @@ html, body{
     width: 33%;
     height: 120px;
     display: flex;
+    font-size: xx-large;
     justify-content: center;
     align-items: center;
     text-align: center;

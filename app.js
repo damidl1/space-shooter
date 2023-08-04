@@ -27,6 +27,11 @@ const scoreText = document.getElementById('score-text');
 const hpBar = document.getElementById('hp-bar');
 let hpWidth = 100 / player.healthPoints;
 
+
+let background = new Image();
+background.src = './assets/space.png';
+let background_y = 0;
+
 gameOverBtn.addEventListener('click', () =>{
     player.healthPoints = 3;
     player.projectiles = [];
@@ -49,6 +54,7 @@ function animation() {
 
     if (state === "Play") {
         if (player) {
+            loopBackground();
             player.draw(ctx);
             player.control(canvasWidth, canvasHeight);
             playerProjectiles = player.projectiles;
@@ -88,6 +94,7 @@ function animation() {
 
   
    hpBar.style.width = hpWidth * player.healthPoints + "%";
+   
  }
 
    
@@ -117,12 +124,12 @@ function minibossSpawn() {
 function enemyCollision() {
     
     let playerAssets = [player, ...playerProjectiles];
-    
+    let enemyAssets =[...allEnemies, ...minibossProjectiles];
     
     for (let i = 0; i < playerAssets.length; i++) {
         const pA = playerAssets[i];
-        for (let j = 0; j < allEnemies.length; j++) {
-            const enemy = allEnemies[j];
+        for (let j = 0; j < enemyAssets.length; j++) {
+            const enemy = enemyAssets[j];
             if (
                 enemy.x < pA.x + pA.width && 
                 enemy.x + enemy.width > pA.x &&
@@ -133,7 +140,7 @@ function enemyCollision() {
               enemy.healthPoints--;
               pA.healthPoints--; 
               enemy.death();
-              if (!enemy.isAlive) {
+              if (!enemy.isAlive && enemy.score && !pA.isPlayer) {
                 player.score += enemy.score;
               }
             }
@@ -160,6 +167,16 @@ function gameStates() {
         default:
             break;
     }
+}
+
+function loopBackground() {
+    ctx.drawImage(background, 0, background_y, canvasWidth, canvasHeight);
+    ctx.drawImage(background, 0, background_y - canvasHeight, canvasWidth, canvasHeight);
+    background_y++;
+    if (background_y >= canvasHeight) {
+        background_y = 0;
+    }
+
 }
 
 animation();

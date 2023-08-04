@@ -9,6 +9,7 @@ class BaseEnemy extends GameObject{
     }
 
     draw(ctx){
+        ctx.fillStyle = 'red';
         super.draw(ctx);
         // this.death();
     }

@@ -9,7 +9,7 @@ class GameObject{
     }
 
     draw(ctx){
-        ctx.fillStyle = 'black';
+        // ctx.fillStyle = 'black';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
