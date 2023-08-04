@@ -162,7 +162,8 @@ function gameStates() {
       if (
         !allBuildings[0].isAlive &&
         !allBuildings[1].isAlive &&
-        !allBuildings[2].isAlive
+        !allBuildings[2].isAlive &&
+        allBuildings.length > 0
       ) {
         state = "GameOver";
       }
