@@ -23,7 +23,7 @@ class Player extends GameObject{
             
         }
 
-        console.log(this.healthPoints)
+       
     }
 
     control(canvasWidth, canvasHeight){
@@ -47,16 +47,16 @@ class Player extends GameObject{
                 this.x = (this.x + this.width) < canvasWidth ? this.x + this.speed : canvasWidth - this.width; 
                 
             }
-            if (this.controller["ArrowUp"]) {
-                this.y = this.y > 0 ? this.y - this.speed : 0;
-                if (this.y <= 0) {
-                    this.y = 0;
-                }
-            }
-            if (this.controller["ArrowDown"]) {
-                this.y = (this.y + this.height) < canvasHeight ? this.y + this.speed : canvasHeight - this.height;
+            // if (this.controller["ArrowUp"]) {
+            //     this.y = this.y > 0 ? this.y - this.speed : 0;
+            //     if (this.y <= 0) {
+            //         this.y = 0;
+            //     }
+            // }
+            // if (this.controller["ArrowDown"]) {
+            //     this.y = (this.y + this.height) < canvasHeight ? this.y + this.speed : canvasHeight - this.height;
                 
-            }
+            // }
             if (this.controller[" "]) {
                 this.baseAttack();
             }
